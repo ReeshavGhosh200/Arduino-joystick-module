@@ -1,43 +1,23 @@
 import serial
 import time
-from pynput.keyboard import Controller as KeyboardController, Key
-from pynput.mouse import Controller as MouseController, Button
+from pynput.keyboard import Controller
 
-# Initialize serial connection
-ser = serial.Serial('COM3', 9600, timeout=1)
-time.sleep(2)  # Wait for the connection to establish
+# Replace 'COM8' with the appropriate port for your Arduino
+ser = serial.Serial('COM8', 9600)
+keyboard = Controller()
 
-# Initialize keyboard and mouse controllers
-keyboard = KeyboardController()
-mouse = MouseController()
-
-# Mapping for key presses
-key_map = {
-    'W': 'w',
-    'A': 'a',
-    'S': 's',
-    'D': 'd',
-    'R': 'right_click'
-}
-
-def press_key(key):
-    keyboard.press(key)
-    keyboard.release(key)
-
-def right_click():
-    mouse.click(Button.right, 1)
+def press_keys(keys):
+    for key in keys:
+        keyboard.press(key)
+    time.sleep(0.1)
+    for key in keys:
+        keyboard.release(key)
 
 try:
     while True:
         if ser.in_waiting > 0:
-            data = ser.read().decode('utf-8')
-            if data in key_map:
-                if key_map[data] == 'right_click':
-                    right_click()
-                else:
-                    press_key(key_map[data])
-
+            line = ser.readline().decode('utf-8').rstrip()
+            if line:
+                press_keys(line)
 except KeyboardInterrupt:
-    print("Exiting...")
-finally:
     ser.close()
