@@ -13,20 +13,26 @@ void setup() {
 }
 
 void loop() {
-  int xData = analogRead(x); 
-  int yData = analogRead(y); 
+  int xData = analogRead(x);
+  int yData = analogRead(y);
   int switchData = digitalRead(Switch);
 
+  String output = "";
+
   if (xData < thresholdLow) {
-    Serial.print('A');
+    output += 's';
   } else if (xData > thresholdHigh) {
-    Serial.print('D');
-  } else if (yData < thresholdLow) {
-    Serial.print('W');
+    output += 'w';
+  }
+
+  if (yData < thresholdLow) {
+    output += 'a';
   } else if (yData > thresholdHigh) {
-    Serial.print('S');
-  } else if (switchData == LOW) {
-    Serial.print('R');
+    output += 'd';
+  }
+
+  if (output.length() > 0) {
+    Serial.println(output);
   }
 
   delay(100);
