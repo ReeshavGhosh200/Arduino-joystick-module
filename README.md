@@ -15,3 +15,5 @@ Important Note: Also in the python code replace 'COM8' with our suitable serial 
 To check for serial prot, connect your arduino, open system manager and look for other devices
 
 Important Note: If you want to play games like minecraft with this, then go to settings, mouse controls and there should be an option called "raw controls" or something, make sure to disable that. If cant find it, ask ChatGPT or any other AI model like Antropic Claude 3 or Google Gemini
+
+Note: Also run pip install pyserial and pip install pynput in cmd or terminal
