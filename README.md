@@ -10,8 +10,7 @@ COMPONENTS REQUIRED:
 Upload the Arduino code to your Arduino Uno/Nano/Mini
 For the python script, download python IDLE, paste the code and run it. Minimize the window and it should work
 For wiring, follow the Wiring.png and Wiring(new).png
-
-Note: If you want it to work, then DO NOT KILL the python script
+<img src="Wiring.png">
 
 Important Note: Also in the python code replace 'COM8' with our suitable serial port (like for instance COM3 ror /dev/ttyUSB0 on linux)
 To check for serial prot, connect your arduino, open system manager and look for other devices
